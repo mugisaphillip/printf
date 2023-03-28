@@ -23,15 +23,17 @@ int _printf(const char *format, ...)
 			format++;
 			switch(*format)
 			{
-			case 'c':
+			case 'c': {
 				char c = (char)va_arg(args, int);
 				char str[2] = {c, '\0'};
 				len += _printStr(str, STDOUT_FILENO);
 				continue;
-			case 's': 
+			}
+			case 's': {
 				char *s = va_arg(args, char *);
 				len += _printStr(s, STDOUT_FILENO);
 				continue;
+			}
 			}
 		}
 		else
