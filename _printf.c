@@ -1,5 +1,6 @@
 #include "main.h"
 #include <unistd.h>
+#include <stdio.h>
 
 /*
  * _printf - variadic function to print passed data
@@ -15,22 +16,24 @@ int _printf(const char *format, ...)
 	va_start(args, format);
 	int len = 0;
 
-	for(; *format == '\0'; format++)
+	for(; *format != '\0'; format++)
 	{
 		if (*format == '%')
 		{
 			format++;
 			switch(*format)
 			{
-			case 'c':
+			case 'c': {
 				char c = (char)va_arg(args, int);
 				char str[2] = {c, '\0'};
 				len += _printStr(str, STDOUT_FILENO);
 				continue;
-			case 's':
+			}
+			case 's': {
 				char *s = va_arg(args, char *);
 				len += _printStr(s, STDOUT_FILENO);
 				continue;
+			}
 			}
 		}
 		else
